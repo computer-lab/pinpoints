@@ -1,0 +1,22 @@
+{
+  "name": "pinpoints",
+  "version": "0.0.1",
+  "description": "Marketing website for pinpoints.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/computer-lab/pinpoints.git"
+  },
+  "author": "Computer Lab",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/computer-lab/pinpoints/issues"
+  },
+  "homepage": "https://github.com/computer-lab/pinpoints#readme",
+  "devDependencies": {
+    "webpack": "^1.12.14"
+  }
+}
