@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/computer-lab/pinpoints#readme",
   "devDependencies": {
-    "webpack": "^1.12.14"
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
   }
 }
