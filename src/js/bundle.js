@@ -1,8 +1,10 @@
 require('./hello');
 require('./world');
 
-var css = require("../sass/test.scss");
+// copy the index boilerplate over to dist
+require('file?name=dist/[name].[ext]!../index.html');
 
+var css = require("../sass/test.scss");
 var React = require('react');
 var ReactDOM = require('react-dom');
 
