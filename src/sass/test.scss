@@ -1,5 +1,8 @@
-body {
-  h1{
-    color: red;
-  }
+$pp-indigo: rgb(20,15,49);
+$pp-red: rgb(255,0,0);
+$pp-blue: rgb(18,0,255);
+
+html {
+  background-color: $pp-indigo;
+  color: yellow;
 }
