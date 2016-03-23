@@ -1,6 +1,13 @@
 language: node_js
 node_js:
-- '0.11'
-- '0.10'
+- '5.1'
 script:
-  - npm run build
+- npm run build
+deploy:
+  provider: s3
+  access_key_id: AKIAI6ZDW5KPIOWNCJGQ
+  secret_access_key:
+    secure: XY4HZwmVlkA/HUihDYBOU4Yb30dBbi+aOQFuc4ff0AqHp69SG3bnqJSzYXFJpWjwnsWrHAUYcL1oPf+uws+GsA01fmbEM53LRAJNgURXKHkoHoDDOcAjof7dyd861HRfu8vWjIrxaeyPhejU6RBg8k3kCfxmS+onCbDOfxk2fyraGL0X/vt6VzX8NoutT5tUI0X4LFMtYkrKuCM3IOHhhAoTAjWIVa26QCMgtgb46+28jGHuyouShnNvmSJHTdCevQs6VPtBi6Fd8T8Gczj4tf7ZKUb64LIS7ju6SBR+8fv8e+3ozzbOugr3AJb7k8X6ypLkXbGDiX5Y9zjb+xb5ZxQAZblT1mxNRymdJshP5PF7mf0B8J4rxWLEwf60+nSQlKyqcesy2NDc/eIzUBg4PE7qmBBVBbsUXP62PjFldkQLShiw/XF4udYLXaw/Ee0iwz33M0LsJFq0L4mjSXN0vF9q7te90YBbIhAM2zYkk3Eo63QTIq8VJYgGXYvv6rNNloDXd8sGoYbzTR7UINXgc2ovX3v2vHDvo5zXkgZ3ojKUMJ1rYYYXKfetGgHcziNfXMh+wTqDqnS+VtdQKexntbchUdd33OQqDNuKpiMkLDAEmLoKNFzv8vkYWtcXLmGhyiNBfgQh10cGdN/KsNOBW1RFVqr9V+8VTVc7gpCoTJA=
+  bucket: pinpoints
+  local-dir: dist
+  acl: public_read
