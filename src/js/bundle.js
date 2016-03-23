@@ -6,4 +6,4 @@ require('file?name=dist/[name].[ext]!../index.html');
 
 var css = require("!style!css!sass!../sass/test.scss");
 
-ReactDOM.render(<h1>Hi</h1>, document.getElementById("content"));
+ReactDOM.render(<h1></h1>, document.getElementById("content"));
