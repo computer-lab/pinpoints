@@ -7,6 +7,17 @@ if (process.env.NODE_ENV !== 'production') {
 return sources;
 }
 
+function getOutputSources() {
+
+if (process.env.NODE_ENV !== 'production') {
+  return '[name].js'
+} else {
+  return 'dist/[name].js'
+}
+
+return sources;
+}
+
 
 module.exports = {
     entry: {
@@ -14,7 +25,7 @@ module.exports = {
           './src/js/bundle'])
     },
     output: {
-        filename: 'dist/[name].js'
+        filename: getOutputSources()
     },
     module: {
       loaders: [
