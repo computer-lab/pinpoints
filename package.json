@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --colors --watch --hot",
-    "build": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js -p"
+    "build": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js -p",
+    "clean": "rm -rf dist/*"
   },
   "repository": {
     "type": "git",
