@@ -1,11 +1,20 @@
+
+function getEntrySources(sources) {
+if (process.env.NODE_ENV !== 'production') {
+    sources.push('webpack-dev-server/client?http://localhost:8080');
+}
+
+return sources;
+}
+
+
 module.exports = {
     entry: {
-        helloWorld: [
-          'webpack-dev-server/client?http://localhost:8080',
-          './src/js/helloworld']
+        bundle: getEntrySources([
+          './src/js/bundle'])
     },
     output: {
-        filename: 'public/[name].js'
+        filename: 'dist/[name].js'
     },
     module: {
       loaders: [
