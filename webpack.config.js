@@ -1,21 +1,17 @@
-
 function getEntrySources(sources) {
-if (process.env.NODE_ENV !== 'production') {
-    sources.push('webpack-dev-server/client?http://localhost:8080');
-}
+  if (process.env.NODE_ENV !== 'production') {
+      sources.push('webpack-dev-server/client?http://localhost:8080');
+  }
 
-return sources;
+  return sources;
 }
 
 function getOutputSources() {
-
-if (process.env.NODE_ENV !== 'production') {
-  return '[name].js'
-} else {
-  return 'dist/[name].js'
-}
-
-return sources;
+  if (process.env.NODE_ENV !== 'production') {
+    return '[name].js'
+  } else {
+    return 'dist/[name].js'
+  }
 }
 
 
