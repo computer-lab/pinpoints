@@ -1,17 +1,22 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Three = require('three');
+// var React = require('react');
+import React from  'react';
+import ReactDOM from 'react-dom';
+import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
+import Three from 'three';
+
 // copy the index boilerplate over to dist
 require('file?name=dist/[name].[ext]!../index.html');
 
 var css = require("!style!css!sass!../sass/test.scss");
 
-var Container = React.createClass({
+var App = React.createClass({
   render: function() {
     return (
-      <div className="container">
+      <div className="app">
        <Header />
-       <Content />
+       <div className="content">
+         {this.props.children}
+       </div>
        <Footer />
       </div>
     );
@@ -22,17 +27,7 @@ var Header = React.createClass({
   render: function() {
     return (
       <div className="header">
-        <h1>Header</h1>
-      </div>
-    );
-  }
-});
-
-var Content = React.createClass({
-  render: function() {
-    return (
-      <div className="content">
-        <HomeCopy />
+        <Link to="/">PINPOINTS</Link>
       </div>
     );
   }
@@ -47,8 +42,16 @@ var HomeCopy = React.createClass({
         and consumer data.  From this complex web of data, PinPoints parses out
         order, and creates a 3D visualization.
         </h2> 
-        <a className="button" href="#">EXPLORE</a>
+        <Link className="button" to="/explore">EXPLORE</Link>
       </div>
+    );
+  }
+});
+
+var Explore = React.createClass({
+  render: function(){
+    return (
+      <h1>Explore</h1>
     );
   }
 });
@@ -63,4 +66,11 @@ var Footer = React.createClass({
   }
 });
 
-ReactDOM.render(<Container />, document.getElementById("container"));
+ReactDOM.render((
+  <Router history={hashHistory}>
+    <Route path="/" component={App}>
+      <IndexRoute component={HomeCopy} />
+      <Route path="explore" component={Explore} />
+    </Route>
+  </Router>
+), document.getElementById("app"));
