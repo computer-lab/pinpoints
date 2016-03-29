@@ -17,8 +17,8 @@ function getOutputSources() {
 
 module.exports = {
     entry: {
-        bundle: getEntrySources([
-          './src/js/bundle'])
+        bundle: getEntrySources(
+        ['./src/js/bundle'])
     },
     output: {
         filename: getOutputSources()

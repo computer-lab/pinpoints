@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import THREE from 'three';
 import ReactTHREE from 'react-three';
+var OrbitControls = require('three-orbit-controls')(THREE)
 
 // copy the index boilerplate over to dist
 require('file?name=dist/[name].[ext]!../index.html');
@@ -68,15 +69,18 @@ var Explore = React.createClass({
     var Mesh = ReactTHREE.Mesh;
     var Object3D = ReactTHREE.Object3D;
     var PerspectiveCamera = ReactTHREE.PerspectiveCamera;
-    var boxGeometry = new THREE.BoxGeometry( 200,200,200);
+    var boxGeometry = new THREE.BoxGeometry(5,500,5);
+    var boxGeometry2= new THREE.BoxGeometry(400,5,5);
+    var boxGeometry3= new THREE.BoxGeometry(5,5,400);
 
-    var width = 500;
-    var height = 200;
+    var width = 600;
+    var height = 400;
     var aspectratio = width / height;
     var cameraprops = {
       fov : 75, 
       aspect : aspectratio, 
-      near : 1, far : 5000, 
+      near : 1, 
+      far : 5000, 
       position : new THREE.Vector3(0,0,600), 
       lookat : new THREE.Vector3(0,0,0)
     };
@@ -84,13 +88,26 @@ var Explore = React.createClass({
     return (
       <div className="copy">
         <h2>Explore</h2>
-        <Renderer width={width} height={height}>
-            <Scene width={width} height={height} camera="maincamera">
+        <Renderer width={width} height={height} background={0x140f31}>
+            <Scene width={width} height={height} camera="maincamera"
+                   orbitControls={OrbitControls}>
                 <PerspectiveCamera name="maincamera" {...cameraprops} />
                 <Object3D>
                   <Mesh quaternion={new THREE.Quaternion()} 
                             position={new THREE.Vector3(0,0,0)}
-                            geometry={boxGeometry} />
+                            geometry={boxGeometry}
+                            material={new THREE.MeshBasicMaterial}
+                            />
+                  <Mesh quaternion={new THREE.Quaternion()} 
+                            position={new THREE.Vector3(0,0,0)}
+                            geometry={boxGeometry2}
+                            material={new THREE.MeshBasicMaterial}
+                            />
+                  <Mesh quaternion={new THREE.Quaternion()} 
+                            position={new THREE.Vector3(0,0,0)}
+                            geometry={boxGeometry3}
+                            material={new THREE.MeshBasicMaterial}
+                            />
                 </Object3D>
             </Scene>
         </Renderer>
