@@ -2,7 +2,8 @@
 import React from  'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
-import Three from 'three';
+import THREE from 'three';
+import ReactTHREE from 'react-three';
 
 // copy the index boilerplate over to dist
 require('file?name=dist/[name].[ext]!../index.html');
@@ -60,9 +61,40 @@ var Home = React.createClass({
 
 var Explore = React.createClass({
   render: function(){
+
+    
+    var Renderer = ReactTHREE.Renderer;
+    var Scene = ReactTHREE.Scene;
+    var Mesh = ReactTHREE.Mesh;
+    var Object3D = ReactTHREE.Object3D;
+    var PerspectiveCamera = ReactTHREE.PerspectiveCamera;
+    var boxGeometry = new THREE.BoxGeometry( 200,200,200);
+
+    var width = 500;
+    var height = 200;
+    var aspectratio = width / height;
+    var cameraprops = {
+      fov : 75, 
+      aspect : aspectratio, 
+      near : 1, far : 5000, 
+      position : new THREE.Vector3(0,0,600), 
+      lookat : new THREE.Vector3(0,0,0)
+    };
+
     return (
       <div className="copy">
         <h2>Explore</h2>
+        <Renderer width={width} height={height}>
+            <Scene width={width} height={height} camera="maincamera">
+                <PerspectiveCamera name="maincamera" {...cameraprops} />
+                <Object3D>
+                  <Mesh quaternion={new THREE.Quaternion()} 
+                            position={new THREE.Vector3(0,0,0)}
+                            geometry={boxGeometry} />
+                </Object3D>
+            </Scene>
+        </Renderer>
+        <div id="three"></div>
         <Link className="button" to="/">Home</Link>
         <Link className="button" to="/contact">Contact</Link>
         <Link className="button" to="/problem">Video: The Problem</Link>
@@ -160,6 +192,7 @@ var VideoBrandVolume = React.createClass({
   }
 });
 
+
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
@@ -173,3 +206,4 @@ ReactDOM.render((
     </Route>
   </Router>
 ), document.getElementById("app"));
+
