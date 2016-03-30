@@ -6,6 +6,7 @@ import THREE from 'three';
 import ReactTHREE from 'react-three';
 var OrbitControls = require('three-orbit-controls')(THREE)
 
+
 // copy the index boilerplate over to dist
 require('file?name=dist/[name].[ext]!../index.html');
 
@@ -61,6 +62,9 @@ var Home = React.createClass({
 });
 
 var Explore = React.createClass({
+  componentDidMount: function(){
+    console.log(this);
+  },
   render: function(){
 
     
@@ -69,12 +73,12 @@ var Explore = React.createClass({
     var Mesh = ReactTHREE.Mesh;
     var Object3D = ReactTHREE.Object3D;
     var PerspectiveCamera = ReactTHREE.PerspectiveCamera;
-    var boxGeometry = new THREE.BoxGeometry(5,500,5);
-    var boxGeometry2= new THREE.BoxGeometry(400,5,5);
-    var boxGeometry3= new THREE.BoxGeometry(5,5,400);
-
-    var width = 600;
-    var height = 400;
+    var boxGeometry = new THREE.BoxGeometry(3,600,3);
+    var boxGeometry2= new THREE.BoxGeometry(600,3,3);
+    var boxGeometry3= new THREE.BoxGeometry(3,3,600);
+    
+    var width = window.innerWidth - 20;
+    var height = 600;
     var aspectratio = width / height;
     var cameraprops = {
       fov : 75, 
@@ -87,7 +91,6 @@ var Explore = React.createClass({
 
     return (
       <div className="copy">
-        <h2>Explore</h2>
         <Renderer width={width} height={height} background={0x140f31}>
             <Scene width={width} height={height} camera="maincamera"
                    orbitControls={OrbitControls}>
@@ -111,7 +114,6 @@ var Explore = React.createClass({
                 </Object3D>
             </Scene>
         </Renderer>
-        <div id="three"></div>
         <Link className="button" to="/">Home</Link>
         <Link className="button" to="/contact">Contact</Link>
         <Link className="button" to="/problem">Video: The Problem</Link>
