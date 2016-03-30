@@ -4,7 +4,9 @@ import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import THREE from 'three';
 import ReactTHREE from 'react-three';
-var OrbitControls = require('three-orbit-controls')(THREE)
+
+// these orbit controls have been modified to not allow zooming and panning
+var OrbitControls = require('./three-orbit-controls')(THREE)
 
 
 // copy the index boilerplate over to dist
