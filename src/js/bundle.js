@@ -8,6 +8,8 @@ import ReactTHREE from 'react-three';
 // these orbit controls have been modified to not allow zooming and panning
 var OrbitControls = require('./three-orbit-controls')(THREE)
 
+var t = require('./helvetiker_regular.typeface')(THREE);
+
 
 // copy the index boilerplate over to dist
 require('file?name=dist/[name].[ext]!../index.html');
@@ -63,21 +65,54 @@ var Home = React.createClass({
   }
 });
 
-var Explore = React.createClass({
-  componentDidMount: function(){
-    console.log(this);
+
+var Text = React.createClass({
+  propTypes: {
+    position: React.PropTypes.instanceOf(THREE.Vector3),
+    quaternion: React.PropTypes.instanceOf(THREE.Quaternion).isRequired
   },
   render: function(){
+    var Mesh = ReactTHREE.Mesh;
 
-    
+    var textProps = { 
+      font: "helvetiker",
+      size: 12,
+      height: 1
+    };
+
+    var textGeometry = new THREE.TextGeometry("Hello World", textProps);
+
+    return <Mesh quaternion={this.props.quaternion} 
+              position={this.props.position}
+              geometry={textGeometry}
+              material={new THREE.MeshBasicMaterial}
+              />
+  }
+});
+
+var Explore = React.createClass({
+  componentDidMount: function(){
+    var x = 0;
+    function animate(){
+      x = x + 10;
+      var position = new THREE.Vector3(0,0,x);
+
+      requestAnimationFrame(animate);
+    }
+    animate();
+  },
+  render: function(){
     var Renderer = ReactTHREE.Renderer;
     var Scene = ReactTHREE.Scene;
     var Mesh = ReactTHREE.Mesh;
     var Object3D = ReactTHREE.Object3D;
+    var Sprite = ReactTHREE.Sprite;
     var PerspectiveCamera = ReactTHREE.PerspectiveCamera;
     var boxGeometry = new THREE.BoxGeometry(3,600,3);
     var boxGeometry2= new THREE.BoxGeometry(600,3,3);
     var boxGeometry3= new THREE.BoxGeometry(3,3,600);
+    this.textPosition = new THREE.Vector3(0,0,0);
+
     
     var width = window.innerWidth - 20;
     var height = 600;
@@ -93,6 +128,7 @@ var Explore = React.createClass({
 
     return (
       <div className="copy">
+        <div id="three-box"></div>
         <Renderer width={width} height={height} background={0x140f31}>
             <Scene width={width} height={height} camera="maincamera"
                    orbitControls={OrbitControls}>
@@ -112,6 +148,9 @@ var Explore = React.createClass({
                             position={new THREE.Vector3(0,0,0)}
                             geometry={boxGeometry3}
                             material={new THREE.MeshBasicMaterial}
+                            />
+                  <Text quaternion={new THREE.Quaternion()} 
+                            position={this.position}
                             />
                 </Object3D>
             </Scene>
