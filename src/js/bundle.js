@@ -2,13 +2,13 @@
 import React from  'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
+import React3 from 'react-three-renderer';
 import THREE from 'three';
-import ReactTHREE from 'react-three';
+//import TrackballControls from './trackball';
+//import ReactTHREE from 'react-three';
 
 // these orbit controls have been modified to not allow zooming and panning
-var OrbitControls = require('./three-orbit-controls')(THREE)
-
-var t = require('./helvetiker_regular.typeface')(THREE);
+var OrbitControls = require('three-orbit-controls')(THREE)
 
 
 // copy the index boilerplate over to dist
@@ -90,81 +90,107 @@ var Text = React.createClass({
   }
 });
 
-var Explore = React.createClass({
-  componentDidMount: function(){
-    var x = 0;
-    function animate(){
-      x = x + 10;
-      var position = new THREE.Vector3(0,0,x);
-
-      requestAnimationFrame(animate);
-    }
-    animate();
-  },
-  render: function(){
-    var Renderer = ReactTHREE.Renderer;
-    var Scene = ReactTHREE.Scene;
-    var Mesh = ReactTHREE.Mesh;
-    var Object3D = ReactTHREE.Object3D;
-    var Sprite = ReactTHREE.Sprite;
-    var PerspectiveCamera = ReactTHREE.PerspectiveCamera;
-    var boxGeometry = new THREE.BoxGeometry(3,600,3);
-    var boxGeometry2= new THREE.BoxGeometry(600,3,3);
-    var boxGeometry3= new THREE.BoxGeometry(3,3,600);
-    this.textPosition = new THREE.Vector3(0,0,0);
-
-    
-    var width = window.innerWidth - 20;
-    var height = 600;
-    var aspectratio = width / height;
-    var cameraprops = {
-      fov : 75, 
-      aspect : aspectratio, 
-      near : 1, 
-      far : 5000, 
-      position : new THREE.Vector3(0,0,600), 
-      lookat : new THREE.Vector3(0,0,0)
+var ExploreThree = React.createClass({
+  getInitialState: function() {
+    return {
+      cameraPosition: new THREE.Vector3(0, 0, 1000),
+      cameraRotation: new THREE.Euler(),
+      helloWorldPosition: new THREE.Vector3(100, 200, 200),
+      helloWorldRotation: new THREE.Euler()
     };
+  },
+  
+  _onTrackballChange : function() {
+    this.setState({
+      cameraPosition: this.refs.camera.position.clone(),
+      cameraRotation: this.refs.camera.rotation.clone(),
+    });
+  },
 
+  hello: function(){
+    console.log("ehhlo");
+
+  },
+
+  componentDidMount: function(){
+    const controls = new OrbitControls(this.refs.camera);
+
+    controls.enableZoom = false;
+    controls.enablePan = false;
+    /*
+    controls.rotateSpeed = 3.0;
+    */
+
+    this.controls = controls;
+    this.controls.addEventListener('change', this._onTrackballChange);
+  },
+
+
+  onAnimate: function() {
+      this.controls.update();
+      this.state.helloWorldRotation = this.refs.camera.rotation.clone()
+
+      /*
+      this.setState({
+        cubeRotation: new THREE.Euler(
+          this.state.cubeRotation.x + 0.1,
+          this.state.cubeRotation.y + 0.1,
+          0
+        ),
+      });
+      */
+    },
+
+  render: function() {
+    const width = window.innerWidth; // canvas width
+    const height = window.innerHeight; // canvas height
+
+   // this.cameraPosition = new THREE.Vector3(0, 0, 600);
     return (
       <div className="copy">
-        <div id="three-box"></div>
-        <Renderer width={width} height={height} background={0x140f31}>
-            <Scene width={width} height={height} camera="maincamera"
-                   orbitControls={OrbitControls}>
-                <PerspectiveCamera name="maincamera" {...cameraprops} />
-                <Object3D>
-                  <Mesh quaternion={new THREE.Quaternion()} 
-                            position={new THREE.Vector3(0,0,0)}
-                            geometry={boxGeometry}
-                            material={new THREE.MeshBasicMaterial}
-                            />
-                  <Mesh quaternion={new THREE.Quaternion()} 
-                            position={new THREE.Vector3(0,0,0)}
-                            geometry={boxGeometry2}
-                            material={new THREE.MeshBasicMaterial}
-                            />
-                  <Mesh quaternion={new THREE.Quaternion()} 
-                            position={new THREE.Vector3(0,0,0)}
-                            geometry={boxGeometry3}
-                            material={new THREE.MeshBasicMaterial}
-                            />
-                  <Text quaternion={new THREE.Quaternion()} 
-                            position={this.position}
-                            />
-                </Object3D>
-            </Scene>
-        </Renderer>
-        <Link className="button" to="/">Home</Link>
-        <Link className="button" to="/contact">Contact</Link>
-        <Link className="button" to="/problem">Video: The Problem</Link>
-        <Link className="button" to="/solution">Video: The Solution</Link>
-        <Link className="button" to="/marketspace">Video: Market Space</Link>
-        <Link className="button" to="/brandvolume">Video: Brand Volume</Link>
+      <React3 mainCamera="camera" width={width} height={height} ref="react3"
+              clearColor={0x140f31} onAnimate={this.onAnimate} antialias>
+        <scene>
+          <perspectiveCamera name="camera" fov={75} aspect={width / height}
+                             near={0.1} far={2000} ref="camera"
+                             position={this.state.cameraPosition} rotation={this.state.cameraRotation}/>
+          <mesh rotation={this.state.cubeRotation}>
+            <boxGeometry width={3} height={900} depth={3} />
+            <meshBasicMaterial color={0xffffff}/>
+          </mesh>
+          <mesh rotation={this.state.cubeRotation}>
+            <boxGeometry width={800} height={3} depth={3} />
+            <meshBasicMaterial color={0xffffff}/>
+          </mesh>
+          <mesh rotation={this.state.cubeRotation}>
+            <boxGeometry width={3} height={3} depth={800} />
+            <meshBasicMaterial color={0xffffff}/>
+          </mesh>
+          <mesh rotation={this.state.helloWorldRotation} position={this.state.helloWorldPosition}>
+            <textGeometry font={font} text={"The Problem"} size={20}
+                          height={1} />
+            <meshBasicMaterial color={0xffffff}/>
+          </mesh> 
+          <mesh position={new THREE.Vector3(120,180,180)} >
+            <sphereGeometry radius={30} />
+            <meshBasicMaterial color={0xff0000}/>
+          </mesh> 
+          <pointLight position={new THREE.Vector3(100,200,200)} color={0xff0000} 
+                      intensity={100} distance={100} />
+          
+        </scene>
+      </React3>
+      <Link className="button" to="/">Home</Link>
+      <Link className="button" to="/contact">Contact</Link>
+      <Link className="button" to="/problem">Video: The Problem</Link>
+      <Link className="button" to="/solution">Video: The Solution</Link>
+      <Link className="button" to="/marketspace">Video: Market Space</Link>
+      <Link className="button" to="/brandvolume">Video: Brand Volume</Link>
       </div>
     );
   }
 });
+
 
 var Contact = React.createClass({
   render: function(){
@@ -252,18 +278,22 @@ var VideoBrandVolume = React.createClass({
   }
 });
 
-
-ReactDOM.render((
-  <Router history={hashHistory}>
-    <Route path="/" component={App}>
-      <IndexRoute component={Home} />
-      <Route path="explore" component={Explore} />
-      <Route path="contact" component={Contact} />
-      <Route path="problem" component={VideoProblem} />
-      <Route path="solution" component={VideoSolution} />
-      <Route path="marketspace" component={VideoMarketSpace} />
-      <Route path="brandvolume" component={VideoBrandVolume} />
-    </Route>
-  </Router>
-), document.getElementById("app"));
-
+var font;
+var loader = new THREE.FontLoader();
+// TODO: fix this font nonsense
+loader.load('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.js', function (response) {
+  font = response;
+  ReactDOM.render((
+    <Router history={hashHistory}>
+      <Route path="/" component={App}>
+        <IndexRoute component={Home} />
+        <Route path="explore" component={ExploreThree} />
+        <Route path="contact" component={Contact} />
+        <Route path="problem" component={VideoProblem} />
+        <Route path="solution" component={VideoSolution} />
+        <Route path="marketspace" component={VideoMarketSpace} />
+        <Route path="brandvolume" component={VideoBrandVolume} />
+      </Route>
+    </Router>
+  ), document.getElementById("app"));
+});
