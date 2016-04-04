@@ -108,7 +108,7 @@ var ExploreThree = React.createClass({
   componentDidMount: function(){
     const controls = new OrbitControls(this.refs.camera, ReactDOM.findDOMNode(this.refs.container));
 
-    //controls.enableZoom = false;
+    controls.enableZoom = false;
     controls.enablePan = false;
     /*
     controls.rotateSpeed = 3.0;
