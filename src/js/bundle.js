@@ -106,7 +106,7 @@ var ExploreThree = React.createClass({
   },
 
   componentDidMount: function(){
-    const controls = new OrbitControls(this.refs.camera, ReactDOM.findDOMNode(this));
+    const controls = new OrbitControls(this.refs.camera, ReactDOM.findDOMNode(this.refs.container));
 
     //controls.enableZoom = false;
     controls.enablePan = false;
@@ -119,7 +119,6 @@ var ExploreThree = React.createClass({
   },
 
   componentDidUpdate(newProps) {
-    console.log(newProps);
     const {
       mouseInput,
     } = this.refs;
