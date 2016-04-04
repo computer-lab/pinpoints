@@ -7,7 +7,6 @@ import THREE from 'three';
 import MouseInput from './MouseInput';
 var OrbitControls = require('three-orbit-controls')(THREE)
 
-
 // copy the index boilerplate over to dist
 require('file?name=dist/[name].[ext]!../index.html');
 
@@ -64,7 +63,6 @@ var Home = React.createClass({
   }
 });
 
-
 var Text = React.createClass({
   propTypes: {
     position: React.PropTypes.instanceOf(THREE.Vector3),
@@ -94,7 +92,7 @@ var ExploreThree = React.createClass({
     return {
       cameraPosition: new THREE.Vector3(0, 0, 1000),
       cameraRotation: new THREE.Euler(),
-
+      mouseInput: null,
       helloWorldPosition: new THREE.Vector3(100, 220, 200),
       helloWorldRotation: new THREE.Euler()
     };
@@ -107,15 +105,10 @@ var ExploreThree = React.createClass({
     });
   },
 
-  hello: function(){
-    console.log("ehhlo");
-
-  },
-
   componentDidMount: function(){
     const controls = new OrbitControls(this.refs.camera, ReactDOM.findDOMNode(this));
 
-    controls.enableZoom = false;
+    //controls.enableZoom = false;
     controls.enablePan = false;
     /*
     controls.rotateSpeed = 3.0;
@@ -125,6 +118,22 @@ var ExploreThree = React.createClass({
     this.controls.addEventListener('change', this._onTrackballChange);
   },
 
+  componentDidUpdate(newProps) {
+    console.log(newProps);
+    const {
+      mouseInput,
+    } = this.refs;
+
+    const {
+      width,
+      height,
+    } = this.props;
+
+    if (width !== newProps.width || height !== newProps.height) {
+      mouseInput.containerResized();
+    }
+  },
+
   componentWillUnmount() {
     this.controls.removeEventListener('change', this._onTrackballChange);
     this.controls.dispose();
@@ -132,8 +141,30 @@ var ExploreThree = React.createClass({
   },
 
   onAnimate: function() {
-      this.controls.update();
-      this.state.helloWorldRotation = this.refs.camera.rotation.clone()
+    var mouseInput = this.refs.mouseInput;
+
+    // handle mouse input (for clicking on cubes)
+    if (!mouseInput.isReady()) {
+      mouseInput.ready(this.refs.scene, this.refs.container, this.refs.camera);
+      //mouseInput.restrictIntersections([this.refs.link]);
+      mouseInput.setActive(false);
+    }
+
+    this.controls.update();
+    this.state.helloWorldRotation = this.refs.camera.rotation.clone()
+  },
+
+  _onMouseDown: function(){
+    document.body.style.cursor = 'initial';
+    window.location.hash = '/problem';
+  },
+
+  _onMouseEnter: function(){
+    document.body.style.cursor = 'pointer';
+  },
+
+  _onMouseLeave: function(){
+    document.body.style.cursor = 'initial';
   },
 
   render: function() {
@@ -143,9 +174,11 @@ var ExploreThree = React.createClass({
    // this.cameraPosition = new THREE.Vector3(0, 0, 600);
     return (
       <div className="copy">
+      <div ref="container">
       <React3 mainCamera="camera" width={width} height={height} ref="react3"
               clearColor={0x140f31} onAnimate={this.onAnimate} antialias>
-        <scene>
+        <module ref="mouseInput" descriptor={MouseInput} />
+        <scene ref="scene">
           <perspectiveCamera name="camera" fov={75} aspect={width / height}
                              near={0.1} far={2000} ref="camera"
                              position={this.state.cameraPosition} rotation={this.state.cameraRotation}/>
@@ -161,12 +194,12 @@ var ExploreThree = React.createClass({
             <boxGeometry width={3} height={3} depth={800} />
             <meshBasicMaterial color={0xffffff}/>
           </mesh>
-          <mesh rotation={this.state.helloWorldRotation} position={this.state.helloWorldPosition}>
+          <mesh rotation={this.state.helloWorldRotation} onMouseDown={this._onMouseDown} onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave} position={this.state.helloWorldPosition}>
             <textGeometry font={font} text={"The Problem"} size={20}
                           height={1} />
             <meshBasicMaterial color={0xffffff}/>
           </mesh> 
-          <mesh position={new THREE.Vector3(120,180,180)} >
+          <mesh position={new THREE.Vector3(120,180,180)} onMouseDown={this._onMouseDown} onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave} >
             <sphereGeometry radius={25} />
             <meshBasicMaterial color={0xff0000}/>
           </mesh> 
@@ -175,6 +208,7 @@ var ExploreThree = React.createClass({
           
         </scene>
       </React3>
+      </div>
       <Link className="button" to="/">Home</Link>
       <Link className="button" to="/contact">Contact</Link>
       <Link className="button" to="/problem">Video: The Problem</Link>
