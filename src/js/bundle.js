@@ -4,10 +4,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import React3 from 'react-three-renderer';
 import THREE from 'three';
-//import TrackballControls from './trackball';
-//import ReactTHREE from 'react-three';
-
-// these orbit controls have been modified to not allow zooming and panning
+import MouseInput from './MouseInput';
 var OrbitControls = require('three-orbit-controls')(THREE)
 
 
@@ -29,6 +26,8 @@ var App = React.createClass({
     );
   }
 });
+
+var func = (sadf, asdf) => ({test:1});
 
 var Header = React.createClass({
   render: function() {
@@ -95,7 +94,8 @@ var ExploreThree = React.createClass({
     return {
       cameraPosition: new THREE.Vector3(0, 0, 1000),
       cameraRotation: new THREE.Euler(),
-      helloWorldPosition: new THREE.Vector3(100, 200, 200),
+
+      helloWorldPosition: new THREE.Vector3(100, 220, 200),
       helloWorldRotation: new THREE.Euler()
     };
   },
@@ -113,7 +113,7 @@ var ExploreThree = React.createClass({
   },
 
   componentDidMount: function(){
-    const controls = new OrbitControls(this.refs.camera);
+    const controls = new OrbitControls(this.refs.camera, ReactDOM.findDOMNode(this));
 
     controls.enableZoom = false;
     controls.enablePan = false;
@@ -125,21 +125,16 @@ var ExploreThree = React.createClass({
     this.controls.addEventListener('change', this._onTrackballChange);
   },
 
+  componentWillUnmount() {
+    this.controls.removeEventListener('change', this._onTrackballChange);
+    this.controls.dispose();
+    delete this.controls;
+  },
 
   onAnimate: function() {
       this.controls.update();
       this.state.helloWorldRotation = this.refs.camera.rotation.clone()
-
-      /*
-      this.setState({
-        cubeRotation: new THREE.Euler(
-          this.state.cubeRotation.x + 0.1,
-          this.state.cubeRotation.y + 0.1,
-          0
-        ),
-      });
-      */
-    },
+  },
 
   render: function() {
     const width = window.innerWidth; // canvas width
@@ -172,7 +167,7 @@ var ExploreThree = React.createClass({
             <meshBasicMaterial color={0xffffff}/>
           </mesh> 
           <mesh position={new THREE.Vector3(120,180,180)} >
-            <sphereGeometry radius={30} />
+            <sphereGeometry radius={25} />
             <meshBasicMaterial color={0xff0000}/>
           </mesh> 
           <pointLight position={new THREE.Vector3(100,200,200)} color={0xff0000} 
