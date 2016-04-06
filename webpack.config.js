@@ -35,7 +35,7 @@ module.exports = {
         },
         { test: /\.(ttf|otf|eot|svg|woff(2)?)$/,
           exclude: /node_modules/,
-          loader: 'file-loader?name=fonts/[name].[ext]'
+          loader: 'file?name=dist/fonts/[name].[ext]'
         } 
       ]
     }
