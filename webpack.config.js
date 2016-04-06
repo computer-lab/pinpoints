@@ -16,7 +16,7 @@ module.exports = {
     output: {
       path: path.join(__dirname, 'dist'),
       filename: "[name].js",
-      publicPath: "/"
+      publicPath: "https://s3-us-west-2.amazonaws.com/pinpoints/"
     },
     module: {
       loaders: [
