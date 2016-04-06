@@ -1,3 +1,5 @@
+var path = require("path");
+
 function getEntrySources(sources) {
   if (process.env.NODE_ENV !== 'production') {
       sources.push('webpack-dev-server/client?http://localhost:8080');
@@ -6,22 +8,15 @@ function getEntrySources(sources) {
   return sources;
 }
 
-function getOutputSources() {
-  if (process.env.NODE_ENV !== 'production') {
-    return '[name].js'
-  } else {
-    return 'dist/[name].js'
-  }
-}
-
-
 module.exports = {
     entry: {
         bundle: getEntrySources(
         ['./src/js/bundle'])
     },
     output: {
-        filename: getOutputSources()
+      path: path.join(__dirname, 'dist'),
+      filename: "[name].js",
+      publicPath: "/"
     },
     module: {
       loaders: [
@@ -35,7 +30,7 @@ module.exports = {
         },
         { test: /\.(ttf|otf|eot|svg|woff(2)?)$/,
           exclude: /node_modules/,
-          loader: 'file?name=dist/fonts/[name].[ext]'
+          loader: 'file?name=fonts/[name].[ext]'
         } 
       ]
     }

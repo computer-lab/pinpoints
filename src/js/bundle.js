@@ -12,7 +12,7 @@ var verdesLogo = require('../fonts/verdes.svg');
 var pinpointsLogo = require('../fonts/pinpoints.svg');
 
 // copy the index boilerplate over to dist
-require('file?name=dist/[name].[ext]!../index.html');
+require('file?name=[name].[ext]!../index.html');
 
 var css = require("!style!css!sass!../sass/test.scss");
 
