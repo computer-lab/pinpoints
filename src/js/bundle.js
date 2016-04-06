@@ -131,6 +131,8 @@ var ExploreThree = React.createClass({
       mouseInput,
     } = this.refs;
 
+    console.log("update");
+
     const {
       width,
       height,
@@ -180,40 +182,40 @@ var ExploreThree = React.createClass({
 
    // this.cameraPosition = new THREE.Vector3(0, 0, 600);
     return (
-      <div ref="container">
-      <React3 mainCamera="camera" width={width} height={height} ref="react3"
-              clearColor={0x140f31} onAnimate={this.onAnimate} antialias>
-        <module ref="mouseInput" descriptor={MouseInput} />
-        <scene ref="scene">
-          <perspectiveCamera name="camera" fov={75} aspect={width / height}
-                             near={0.1} far={2000} ref="camera"
-                             position={this.state.cameraPosition} rotation={this.state.cameraRotation}/>
-          <mesh rotation={this.state.cubeRotation}>
-            <boxGeometry width={3} height={900} depth={3} />
-            <meshBasicMaterial color={0xffffff}/>
-          </mesh>
-          <mesh rotation={this.state.cubeRotation}>
-            <boxGeometry width={800} height={3} depth={3} />
-            <meshBasicMaterial color={0xffffff}/>
-          </mesh>
-          <mesh rotation={this.state.cubeRotation}>
-            <boxGeometry width={3} height={3} depth={800} />
-            <meshBasicMaterial color={0xffffff}/>
-          </mesh>
-          <mesh rotation={this.state.helloWorldRotation} onMouseDown={this._onMouseDown} onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave} position={this.state.helloWorldPosition}>
-            <textGeometry font={font} text={"The Problem"} size={20}
-                          height={1} />
-            <meshBasicMaterial color={0xffffff}/>
-          </mesh> 
-          <mesh position={new THREE.Vector3(120,180,180)} onMouseDown={this._onMouseDown} onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave} >
-            <sphereGeometry radius={25} />
-            <meshBasicMaterial color={0xff0000}/>
-          </mesh> 
-          <pointLight position={new THREE.Vector3(100,200,200)} color={0xff0000} 
-                      intensity={100} distance={100} />
-          
-        </scene>
-      </React3>
+      <div className="container" ref="container">
+        <React3 mainCamera="camera" width={width} height={height} ref="react3"
+                clearColor={0x140f31} onAnimate={this.onAnimate} antialias>
+          <module ref="mouseInput" descriptor={MouseInput} />
+          <scene ref="scene">
+            <perspectiveCamera name="camera" fov={75} aspect={width / height}
+                               near={0.1} far={2000} ref="camera"
+                               position={this.state.cameraPosition} rotation={this.state.cameraRotation}/>
+            <mesh rotation={this.state.cubeRotation}>
+              <boxGeometry width={3} height={900} depth={3} />
+              <meshBasicMaterial color={0xffffff}/>
+            </mesh>
+            <mesh rotation={this.state.cubeRotation}>
+              <boxGeometry width={800} height={3} depth={3} />
+              <meshBasicMaterial color={0xffffff}/>
+            </mesh>
+            <mesh rotation={this.state.cubeRotation}>
+              <boxGeometry width={3} height={3} depth={800} />
+              <meshBasicMaterial color={0xffffff}/>
+            </mesh>
+            <mesh rotation={this.state.helloWorldRotation} onMouseDown={this._onMouseDown} onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave} position={this.state.helloWorldPosition}>
+              <textGeometry font={font} text={"The Problem"} size={20}
+                            height={1} />
+              <meshBasicMaterial color={0xffffff}/>
+            </mesh> 
+            <mesh position={new THREE.Vector3(120,180,180)} onMouseDown={this._onMouseDown} onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave} >
+              <sphereGeometry radius={25} />
+              <meshBasicMaterial color={0xff0000}/>
+            </mesh> 
+            <pointLight position={new THREE.Vector3(100,200,200)} color={0xff0000} 
+                        intensity={100} distance={100} />
+            
+          </scene>
+        </React3>
       </div>
     );
   }

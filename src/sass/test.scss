@@ -40,6 +40,13 @@ table {
   border-spacing: 0; 
 }
 
+/* Border-Box */
+
+* {
+  box-sizing: border-box;
+
+}
+
 /* Fonts */
 
 @font-face {
@@ -63,7 +70,7 @@ html {
 
 
 .header {
-  height: 4em;
+  height: 5em;
   width: 100%;
   background: linear-gradient(to right, $pp-red 65%, $pp-indigo 100%);
   padding: $padding-unit 2 * $padding-unit;
@@ -79,7 +86,8 @@ html {
   padding: 0.6em 0.6em;
   overflow: hidden;
   line-height: 1.5;
-  max-width: 50%;
+  max-width: 60em;
+  letter-spacing: 1px;
 
   h2 {
     font-size: 2.5em;
@@ -97,14 +105,20 @@ html {
   display: flex;
 }
 
+.container canvas {
+  height: 100%;
+}
+
 a.button {
-  margin: 1em 1em;
+  margin: 2.5em 1em;
   display: inline-block;
-  padding: 0.8em 1em;
+  padding: 0.8em 2em 0.8em 2em;
   border: 1px solid white;
   color: white;
   text-decoration: none;
   font-style: italic;
+  letter-spacing: 2px;
+  font-family: sans-serif;
 }
 
 .videoPlayer {
