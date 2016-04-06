@@ -1,4 +1,7 @@
-// var React = require('react');
+//  Index boilerplate that loads the bundle
+require('file?name=[name].[ext]!../index.html');
+
+// JavaScript Modules
 import React from  'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
@@ -11,9 +14,7 @@ var OrbitControls = require('three-orbit-controls')(THREE)
 var verdesLogo = require('../fonts/verdes.svg');
 var pinpointsLogo = require('../fonts/pinpoints.svg');
 
-// copy the index boilerplate over to dist
-require('file?name=[name].[ext]!../index.html');
-
+// CSS
 var css = require("!style!css!sass!../sass/test.scss");
 
 var App = React.createClass({
