@@ -33,10 +33,10 @@ module.exports = {
             plugins: ['transform-runtime', 'transform-decorators-legacy']
           }, 
         },
-/*        { test: /\.scss$/, 
+        { test: /\.(ttf|otf|eot|svg|woff(2)?)$/,
           exclude: /node_modules/,
-          loaders: ["style", "css", "sass"], 
-        } */
+          loader: 'file-loader?name=fonts/[name].[ext]'
+        } 
       ]
     }
 

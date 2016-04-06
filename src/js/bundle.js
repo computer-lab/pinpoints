@@ -7,6 +7,10 @@ import THREE from 'three';
 import MouseInput from './MouseInput';
 var OrbitControls = require('three-orbit-controls')(THREE)
 
+// Images
+var verdesLogo = require('../fonts/verdes.svg');
+var pinpointsLogo = require('../fonts/pinpoints.svg');
+
 // copy the index boilerplate over to dist
 require('file?name=dist/[name].[ext]!../index.html');
 
@@ -32,7 +36,9 @@ var Header = React.createClass({
   render: function() {
     return (
       <div className="header">
-        <Link to="/">PINPOINTS</Link>
+        <Link to="/">
+          <img src={pinpointsLogo} />
+        </Link>
       </div>
     );
   }
@@ -42,7 +48,9 @@ var Footer = React.createClass({
   render: function() {
     return (
       <div className="footer copy">
-        <h1>Verdes NYC</h1>
+        <Link to="http://verdes.nyc">
+          <img src={verdesLogo} />
+        </Link>
       </div>
     );
   }
@@ -172,7 +180,6 @@ var ExploreThree = React.createClass({
 
    // this.cameraPosition = new THREE.Vector3(0, 0, 600);
     return (
-      <div className="copy">
       <div ref="container">
       <React3 mainCamera="camera" width={width} height={height} ref="react3"
               clearColor={0x140f31} onAnimate={this.onAnimate} antialias>
@@ -207,13 +214,6 @@ var ExploreThree = React.createClass({
           
         </scene>
       </React3>
-      </div>
-      <Link className="button" to="/">Home</Link>
-      <Link className="button" to="/contact">Contact</Link>
-      <Link className="button" to="/problem">Video: The Problem</Link>
-      <Link className="button" to="/solution">Video: The Solution</Link>
-      <Link className="button" to="/marketspace">Video: Market Space</Link>
-      <Link className="button" to="/brandvolume">Video: Brand Volume</Link>
       </div>
     );
   }
