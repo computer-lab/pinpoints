@@ -40,6 +40,14 @@ var Header = React.createClass({
         <Link to="/">
           <img src={pinpointsLogo} />
         </Link>
+        <div className="social">
+          <a className="button" href="https://facebook.com">
+            f
+          </a>
+          <a className="button" href="https://facebook.com">
+            t
+          </a>
+        </div>
       </div>
     );
   }
