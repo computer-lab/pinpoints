@@ -22,7 +22,7 @@ var App = React.createClass({
     return (
       <div className="app">
        <Header />
-       <div className="content">
+       <div className="content" ref="content">
          {this.props.children}
        </div>
        <Footer />
@@ -105,6 +105,40 @@ var Text = React.createClass({
 });
 
 var ExploreThree = React.createClass({
+  getInitialState: function(){
+    return {
+      viewerHeight: 0,
+      viewerWidth: 0
+    }
+  },
+  componentDidMount: function() {
+    window.addEventListener('resize', this._onWindowResize, false);
+    this._onWindowResize();
+  },
+
+  componentWillUnmount: function() {
+    window.removeEventListener('resize', this._onWindowResize, false);
+  },
+
+  _onWindowResize: function() {
+    const viewer = this.refs.viewer;
+
+    this.setState({
+      viewerWidth: viewer.offsetWidth,
+      viewerHeight: viewer.offsetHeight,
+    });
+  },
+
+  render: function(){
+    return( 
+      <div className="container" ref="viewer">
+      <ExploreThreeRenderer width={this.state.viewerWidth} height={this.state.viewerHeight} />
+      </div>
+      );
+  }
+});
+
+var ExploreThreeRenderer = React.createClass({
   getInitialState: function() {
     return {
       cameraPosition: new THREE.Vector3(0, 0, 1000),
@@ -186,17 +220,14 @@ var ExploreThree = React.createClass({
   },
 
   render: function() {
-    const width = window.innerWidth; // canvas width
-    const height = window.innerHeight; // canvas height
-
    // this.cameraPosition = new THREE.Vector3(0, 0, 600);
     return (
       <div className="container" ref="container">
-        <React3 mainCamera="camera" width={width} height={height} ref="react3"
+        <React3 mainCamera="camera" width={this.props.width} height={this.props.height} ref="react3"
                 clearColor={0x140f31} onAnimate={this.onAnimate} antialias>
           <module ref="mouseInput" descriptor={MouseInput} />
           <scene ref="scene">
-            <perspectiveCamera name="camera" fov={75} aspect={width / height}
+            <perspectiveCamera name="camera" fov={75} aspect={this.props.width / this.props.height}
                                near={0.1} far={2000} ref="camera"
                                position={this.state.cameraPosition} rotation={this.state.cameraRotation}/>
             <mesh rotation={this.state.cubeRotation}>

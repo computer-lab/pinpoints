@@ -103,10 +103,13 @@ html {
 .content {
   flex: 1;
   display: flex;
+  position: relative;
 }
 
-.container canvas {
+.container {
+  position: absolute;
   height: 100%;
+  width: 100%;
 }
 
 a.button {
