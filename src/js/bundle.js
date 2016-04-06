@@ -48,9 +48,9 @@ var Footer = React.createClass({
   render: function() {
     return (
       <div className="footer copy">
-        <Link to="http://verdes.nyc">
+        <a href="http://verdes.nyc">
           <img src={verdesLogo} />
-        </Link>
+        </a>
       </div>
     );
   }
