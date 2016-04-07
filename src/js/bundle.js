@@ -42,10 +42,10 @@ var Header = React.createClass({
         </Link>
         <div className="social">
           <a className="button" href="https://facebook.com">
-            f
+            <i className="fa fa-facebook fa-fw"></i>
           </a>
           <a className="button" href="https://facebook.com">
-            t
+            <i className="fa fa-twitter fa-fw"></i>
           </a>
         </div>
       </div>
