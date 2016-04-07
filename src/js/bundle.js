@@ -141,7 +141,7 @@ var ExploreThree = React.createClass({
 var ExploreThreeRenderer = React.createClass({
   getInitialState: function() {
     return {
-      cameraPosition: new THREE.Vector3(0, 0, 1000),
+      cameraPosition: new THREE.Vector3(0, 100, 800),
       cameraRotation: new THREE.Euler(),
       mouseInput: null,
       helloWorldPosition: new THREE.Vector3(100, 220, 200),
@@ -161,6 +161,8 @@ var ExploreThreeRenderer = React.createClass({
 
     controls.enableZoom = false;
     controls.enablePan = false;
+    controls.autoRotate = true;
+    controls.enableDamping = true;
     /*
     controls.rotateSpeed = 3.0;
     */
@@ -174,7 +176,6 @@ var ExploreThreeRenderer = React.createClass({
       mouseInput,
     } = this.refs;
 
-    console.log("update");
 
     const {
       width,
@@ -248,7 +249,7 @@ var ExploreThreeRenderer = React.createClass({
               <meshBasicMaterial color={0xffffff}/>
             </mesh> 
             <mesh position={new THREE.Vector3(120,180,180)} onMouseDown={this._onMouseDown} onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave} >
-              <sphereGeometry radius={25} />
+              <sphereGeometry radius={30} />
               <meshBasicMaterial color={0xff0000}/>
             </mesh> 
             <pointLight position={new THREE.Vector3(100,200,200)} color={0xff0000} 
