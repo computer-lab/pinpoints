@@ -162,7 +162,10 @@ var ExploreThreeRenderer = React.createClass({
     controls.enableZoom = false;
     controls.enablePan = false;
     controls.autoRotate = true;
-    controls.enableDamping = true;
+    controls.autoRotateSpeed = 0.5;
+    controls.minPolarAngle = 0.14;
+    controls.maxPolarAngle = 3.0;
+
     /*
     controls.rotateSpeed = 3.0;
     */
