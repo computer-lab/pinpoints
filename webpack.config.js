@@ -31,6 +31,9 @@ module.exports = {
         { test: /\.(ttf|otf|eot|svg|woff(2)?)$/,
           exclude: /node_modules/,
           loader: 'file?name=fonts/[name].[ext]'
+        },
+        { test: /\.(png|jpg)$/,
+          loader: 'url?limit=8192&name=images/[name].[ext]'
         } 
       ]
     }

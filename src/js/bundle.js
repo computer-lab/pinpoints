@@ -10,6 +10,8 @@ import THREE from 'three';
 import MouseInput from './MouseInput';
 var OrbitControls = require('three-orbit-controls')(THREE)
 
+var bundle = require('../images/favicon.png');
+
 // Images
 var verdesLogo = require('../fonts/verdes.svg');
 var pinpointsLogo = require('../fonts/pinpoints.svg');
