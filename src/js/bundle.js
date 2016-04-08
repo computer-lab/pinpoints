@@ -8,6 +8,8 @@ import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import React3 from 'react-three-renderer';
 import THREE from 'three';
 import MouseInput from './MouseInput';
+import Favicon from 'react-favicon';
+
 var OrbitControls = require('three-orbit-controls')(THREE)
 
 var bundle = require('../images/favicon.png');
@@ -15,6 +17,7 @@ var bundle = require('../images/favicon.png');
 // Images
 var verdesLogo = require('../fonts/verdes.svg');
 var pinpointsLogo = require('../fonts/pinpoints.svg');
+var favicon = require('../images/favicon.png');
 
 // CSS
 var css = require("!style!css!sass!../sass/test.scss");
@@ -23,6 +26,7 @@ var App = React.createClass({
   render: function() {
     return (
       <div className="app">
+       <Favicon url={favicon} />
        <Header />
        <div className="content" ref="content">
          {this.props.children}
