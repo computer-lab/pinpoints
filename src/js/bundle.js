@@ -144,14 +144,54 @@ var ExploreThree = React.createClass({
   }
 });
 
+var RedDot = React.createClass({
+  getInitialState: function(){
+    return { color: 0xee0000, wireframe: false };
+  },
+  _onMouseDown: function(){
+    document.body.style.cursor = 'initial';
+    window.location.hash = this.props.href;
+  },
+
+  _onMouseEnter: function(){
+    document.body.style.cursor = 'pointer';
+    this.setState({ color: 0xff0000, wireframe: true });
+  },
+
+  _onMouseLeave: function(){
+    document.body.style.cursor = 'initial';
+    this.setState({ color: 0xee0000, wireframe: false });
+  },
+  render: function(){
+    return (
+      <mesh position={this.props.position} rotation={new THREE.Euler()}
+            onMouseDown={this._onMouseDown} onMouseEnter={this._onMouseEnter}
+            onMouseLeave={this._onMouseLeave}> 
+        <sphereGeometry widthSegments={16} heightSegments={12} radius={35} />
+        <meshBasicMaterial wireframe={this.state.wireframe} color={this.state.color}/>
+      </mesh>
+      );
+  }
+});
+
+var RedDotText = React.createClass({
+  render: function(){
+    return (
+      <mesh position={this.props.position} rotation={this.props.rotation}>
+        <textGeometry font={font} text={this.props.text} size={20} height={1} />
+        <meshBasicMaterial color={0xffffff}/>
+      </mesh> 
+      );
+  }
+});
+
+
 var ExploreThreeRenderer = React.createClass({
   getInitialState: function() {
     return {
       cameraPosition: new THREE.Vector3(0, 100, 800),
       cameraRotation: new THREE.Euler(),
       mouseInput: null,
-      helloWorldPosition: new THREE.Vector3(100, 220, 200),
-      helloWorldRotation: new THREE.Euler()
     };
   },
   
@@ -168,13 +208,9 @@ var ExploreThreeRenderer = React.createClass({
     controls.enableZoom = false;
     controls.enablePan = false;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.5;
+    controls.autoRotateSpeed = 0.75;
     controls.minPolarAngle = 0.14;
     controls.maxPolarAngle = 3.0;
-
-    /*
-    controls.rotateSpeed = 3.0;
-    */
 
     this.controls = controls;
     this.controls.addEventListener('change', this._onTrackballChange);
@@ -213,30 +249,16 @@ var ExploreThreeRenderer = React.createClass({
     }
 
     this.controls.update();
-    this.state.helloWorldRotation = this.refs.camera.rotation.clone()
   },
 
-  _onMouseDown: function(){
-    document.body.style.cursor = 'initial';
-    window.location.hash = '/problem';
-  },
-
-  _onMouseEnter: function(){
-    document.body.style.cursor = 'pointer';
-  },
-
-  _onMouseLeave: function(){
-    document.body.style.cursor = 'initial';
-  },
 
   render: function() {
-   // this.cameraPosition = new THREE.Vector3(0, 0, 600);
     return (
       <div className="container" ref="container">
         <React3 mainCamera="camera" width={this.props.width} height={this.props.height} ref="react3"
                 clearColor={0x140f31} onAnimate={this.onAnimate} antialias>
           <module ref="mouseInput" descriptor={MouseInput} />
-          <scene ref="scene">
+          <scene ref="scene" fog={new THREE.Fog(0x140f31,1,2000)}>
             <perspectiveCamera name="camera" fov={75} aspect={this.props.width / this.props.height}
                                near={0.1} far={2000} ref="camera"
                                position={this.state.cameraPosition} rotation={this.state.cameraRotation}/>
@@ -252,18 +274,31 @@ var ExploreThreeRenderer = React.createClass({
               <boxGeometry width={3} height={3} depth={800} />
               <meshBasicMaterial color={0xffffff}/>
             </mesh>
-            <mesh rotation={this.state.helloWorldRotation} onMouseDown={this._onMouseDown} onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave} position={this.state.helloWorldPosition}>
-              <textGeometry font={font} text={"The Problem"} size={20}
-                            height={1} />
-              <meshBasicMaterial color={0xffffff}/>
-            </mesh> 
-            <mesh position={new THREE.Vector3(120,180,180)} onMouseDown={this._onMouseDown} onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave} >
-              <sphereGeometry radius={30} />
-              <meshBasicMaterial color={0xff0000}/>
-            </mesh> 
-            <pointLight position={new THREE.Vector3(100,200,200)} color={0xff0000} 
-                        intensity={100} distance={100} />
-            
+            <RedDot position={new THREE.Vector3(-175,250,125)}
+                    href={"/problem"} />
+            <RedDotText position={new THREE.Vector3(-175,300,125)} 
+                        rotation={this.state.cameraRotation}
+                        text={"The Problem"} />
+            <RedDot position={new THREE.Vector3(100,100,100)}
+                    href={"/solution"} />
+            <RedDotText position={new THREE.Vector3(100,150,100)} 
+                        rotation={this.state.cameraRotation}
+                        text={"The Solution"} />
+            <RedDot position={new THREE.Vector3(-200,-230,-150)}
+                    href={"/brandvolume"} />
+            <RedDotText position={new THREE.Vector3(-200,-180,-150)} 
+                        rotation={this.state.cameraRotation}
+                        text={"Brand Volume"} />
+            <RedDot position={new THREE.Vector3(180,-100,-150)}
+                    href={"/marketspace"} />
+            <RedDotText position={new THREE.Vector3(180,-50,-150)} 
+                        rotation={this.state.cameraRotation}
+                        text={"Market Space"} />
+            <RedDot position={new THREE.Vector3(150,-270,50)}
+                    href={"/contact"} />
+            <RedDotText position={new THREE.Vector3(150,-220,50)} 
+                        rotation={this.state.cameraRotation}
+                        text={"Contact"} />
           </scene>
         </React3>
       </div>
@@ -281,7 +316,7 @@ var Contact = React.createClass({
         redefine how businesses visualize the market space and their place
         within it.  To use PinPoints, get in touch with us.
         </h2> 
-        <Link className="button" to="/contact">Contact</Link>
+        <a className="button" href="mailto:info@verdes.nyc">Contact</a>
       </div>
     );
   }
@@ -307,7 +342,7 @@ var VideoProblem = React.createClass({
         <h2>The Problem</h2>
         <VideoPlayer videoId="140358722" />
         <br />
-        <Link className="button" to="/explore">Explore</Link>
+        <Link className="button" to="/explore">Back</Link>
       </div>
     );
   }
@@ -322,7 +357,7 @@ var VideoSolution = React.createClass({
         </h2> 
         <VideoPlayer videoId="140358721" />
         <br />
-        <Link className="button" to="/explore">Explore</Link>
+        <Link className="button" to="/explore">Back</Link>
       </div>
     );
   }
@@ -337,7 +372,7 @@ var VideoMarketSpace = React.createClass({
         </h2> 
         <VideoPlayer videoId="140359046" />
         <br />
-        <Link className="button" to="/explore">Explore</Link>
+        <Link className="button" to="/explore">Back</Link>
       </div>
     );
   }
@@ -352,7 +387,7 @@ var VideoBrandVolume = React.createClass({
         </h2> 
         <VideoPlayer videoId="140687606" />
         <br />
-        <Link className="button" to="/explore">Explore</Link>
+        <Link className="button" to="/explore">Back</Link>
       </div>
     );
   }
