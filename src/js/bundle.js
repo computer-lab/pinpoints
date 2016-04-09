@@ -343,7 +343,7 @@ var VideoPlayer = React.createClass({
   render: function(){
     return (
       <iframe src={"https://player.vimeo.com/video/" + this.props.videoId +
-        "?byline=0&portrait=0&title=0&autoplay=1"} width="500" height="281"
+        "?byline=0&portrait=0&title=0&autoplay=1"} width="750" height="422"
         frameBorder="0" webkitallowfullscreen mozallowfullscreen allowFullScreen
         className="videoPlayer"></iframe>
     );

@@ -138,8 +138,11 @@ a.button:hover, a.button:focus {
 }
 
 .videoPlayer {
-  max-width: 90vw;
+  max-width: 95vw;
   margin-top: $padding-unit;
+  @media(max-width: $on-mobile){
+    height: 220px;
+  }
 }
 
 .footer img {
