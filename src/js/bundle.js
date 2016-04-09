@@ -243,7 +243,8 @@ var ExploreThreeRenderer = React.createClass({
     } = this.props;
 
     if (width !== newProps.width || height !== newProps.height) {
-      mouseInput.containerResized();
+      if(mouseInput._isReady)
+        mouseInput.containerResized();
     }
   },
 
