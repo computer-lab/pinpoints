@@ -40,6 +40,21 @@ var App = React.createClass({
 var func = (sadf, asdf) => ({test:1});
 
 var Header = React.createClass({
+  facebookShare: function(){
+    var url = encodeURIComponent(window.location);
+    window.open('https://www.facebook.com/sharer/sharer.php?u='+ url,
+        'facebook-share-dialog',
+        'width=626,height=436'); 
+  },
+  twitterShare: function(){
+    window.twttr=window.twttr||{};
+    var D=550,A=450,C=screen.height,B=screen.width,H=Math.round((B/2)-(D/2)),G=0,F=document,E;
+    if(C>A){G=Math.round((C/2)-(A/2))}
+      window.twttr.shareWin=window.open('https://twitter.com/intent/tweet?text=Explore PinPoints. http://verdes.nyc','','left='+H+',top='+G+',width='+D+',height='+A+',personalbar=0,toolbar=0,scrollbars=1,resizable=1');
+    E=F.createElement('script');
+    E.src='http://platform.twitter.com/widgets.js';
+    F.getElementsByTagName('head')[0].appendChild(E);
+  },
   render: function() {
     return (
       <div className="header">
@@ -47,10 +62,10 @@ var Header = React.createClass({
           <img src={pinpointsLogo} />
         </Link>
         <div className="social">
-          <a className="button" href="https://facebook.com">
+          <a className="button" href="javascript:;" onClick={this.facebookShare}>
             <i className="fa fa-facebook fa-fw"></i>
           </a>
-          <a className="button" href="https://facebook.com">
+          <a className="button" href="javascript:;" onClick={this.twitterShare}>
             <i className="fa fa-twitter fa-fw"></i>
           </a>
         </div>
@@ -258,7 +273,7 @@ var ExploreThreeRenderer = React.createClass({
         <React3 mainCamera="camera" width={this.props.width} height={this.props.height} ref="react3"
                 clearColor={0x140f31} onAnimate={this.onAnimate} antialias>
           <module ref="mouseInput" descriptor={MouseInput} />
-          <scene ref="scene" fog={new THREE.Fog(0x140f31,1,2000)}>
+          <scene ref="scene" fog={new THREE.Fog(0x140f31,300,2000)}>
             <perspectiveCamera name="camera" fov={75} aspect={this.props.width / this.props.height}
                                near={0.1} far={2000} ref="camera"
                                position={this.state.cameraPosition} rotation={this.state.cameraRotation}/>
