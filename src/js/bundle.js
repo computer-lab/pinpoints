@@ -18,6 +18,10 @@ var bundle = require('../images/favicon.png');
 var verdesLogo = require('../fonts/verdes.svg');
 var pinpointsLogo = require('../fonts/pinpoints.svg');
 var favicon = require('../images/favicon.png');
+var theProblemVideo = require('../videos/the-problem.mp4');
+var theSolutionVideo = require('../videos/the-solution.mp4');
+var brandVolumeVideo = require('../videos/brand-volume.mp4');
+var marketSpaceVideo = require('../videos/market-space.mp4');
 
 // CSS
 var css = require("!style!css!sass!../sass/test.scss");
@@ -314,7 +318,7 @@ var ExploreThreeRenderer = React.createClass({
                     href={"/contact"} />
             <RedDotText position={new THREE.Vector3(150,-220,50)} 
                         rotation={this.state.cameraRotation}
-                        text={"Contact"} />
+                        text={"Use PinPoints"} />
           </scene>
         </React3>
       </div>
@@ -339,7 +343,7 @@ var Contact = React.createClass({
 });
 
 
-var VideoPlayer = React.createClass({
+var VimeoPlayer = React.createClass({
   render: function(){
     return (
       <iframe src={"https://player.vimeo.com/video/" + this.props.videoId +
@@ -350,13 +354,20 @@ var VideoPlayer = React.createClass({
   }
 });
 
+var VideoPlayer = React.createClass({
+  render: function(){
+    return (
+        <video src={this.props.video} controls autoPlay></video>
+    );
+  }
+});
 
 var VideoProblem = React.createClass({
   render: function(){
     return (
       <div className="copy">
         <h2>The Problem</h2>
-        <VideoPlayer videoId="140358722" />
+        <VideoPlayer video={theProblemVideo} />
         <br />
         <Link className="button" to="/explore">Back</Link>
       </div>
@@ -371,7 +382,7 @@ var VideoSolution = React.createClass({
         <h2>
         The Solution
         </h2> 
-        <VideoPlayer videoId="140358721" />
+        <VideoPlayer video={theSolutionVideo} />
         <br />
         <Link className="button" to="/explore">Back</Link>
       </div>
@@ -386,7 +397,7 @@ var VideoMarketSpace = React.createClass({
         <h2>
         Market Space
         </h2> 
-        <VideoPlayer videoId="140359046" />
+        <VideoPlayer video={marketSpaceVideo} />
         <br />
         <Link className="button" to="/explore">Back</Link>
       </div>
@@ -401,7 +412,7 @@ var VideoBrandVolume = React.createClass({
         <h2>
         Brand Volume
         </h2> 
-        <VideoPlayer videoId="140687606" />
+        <VideoPlayer video={brandVolumeVideo} />
         <br />
         <Link className="button" to="/explore">Back</Link>
       </div>

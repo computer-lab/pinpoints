@@ -32,6 +32,10 @@ module.exports = {
           exclude: /node_modules/,
           loader: 'file?name=fonts/[name].[ext]'
         },
+        { test: /\.(mp4|webm?)$/,
+          exclude: /node_modules/,
+          loader: 'file?name=videos/[name].[ext]'
+        },
         { test: /\.(png|jpg)$/,
           loader: 'url?limit=8192&name=images/[name].[ext]'
         } 
