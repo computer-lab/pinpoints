@@ -95,9 +95,7 @@ var Home = React.createClass({
     return (
       <div className="copy"> 
         <h2>
-        PinPoints is a tool that uses a series of algorithms to aggregate market
-        and consumer data.  From this complex web of data, PinPoints parses out
-        order, and creates a 3D visualization.
+            PinPoints is a digital tool that turns large convoluted data sets into insights. 
         </h2> 
         <Link className="button" to="/explore">EXPLORE</Link>
       </div>
@@ -283,15 +281,15 @@ var ExploreThreeRenderer = React.createClass({
                                near={0.1} far={2000} ref="camera"
                                position={this.state.cameraPosition} rotation={this.state.cameraRotation}/>
             <mesh rotation={this.state.cubeRotation}>
-              <boxGeometry width={3} height={900} depth={3} />
+              <boxGeometry width={3} height={960} depth={3} />
               <meshBasicMaterial color={0xffffff}/>
             </mesh>
             <mesh rotation={this.state.cubeRotation}>
-              <boxGeometry width={800} height={3} depth={3} />
+              <boxGeometry width={850} height={3} depth={3} />
               <meshBasicMaterial color={0xffffff}/>
             </mesh>
             <mesh rotation={this.state.cubeRotation}>
-              <boxGeometry width={3} height={3} depth={800} />
+              <boxGeometry width={3} height={3} depth={850} />
               <meshBasicMaterial color={0xffffff}/>
             </mesh>
             <RedDot position={new THREE.Vector3(-175,250,125)}
