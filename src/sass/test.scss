@@ -131,6 +131,7 @@ a.button {
   font-style: italic;
   letter-spacing: 2px;
   font-family: sans-serif;
+  transition: color 0.1s, background 0.3s;
 }
 
 a.button:hover, a.button:focus {
@@ -145,14 +146,6 @@ a.button:hover, a.button:focus {
   }
 }
 
-.footer img {
-  height: 3.5em;
-
-  @media(max-width: $on-mobile){
-    height: 2em;
-  }
-}
-
 .social {
   float: right;
   a.button {
@@ -162,5 +155,62 @@ a.button:hover, a.button:focus {
     margin-right: 0em;
   }
 
+  a.button:hover, a.button:focus {
+    color: $pp-indigo;
+    background: white;
+  }
 }
+
+
+#verdes-logo {
+  display: block;
+}
+
+#verdes-bird {
+  display: block;
+  height: 2.0em;
+  @media(max-width: $on-mobile){
+    height: 1.5em;
+  }
+  margin: auto;
+  margin-bottom: 0.75em;
+}
+
+#verdes-text {
+  height: 0.45em;
+  display: block;
+}
+
+
+#verdes-logo:hover #verdes-bird {
+  -webkit-animation: bounce .52s infinite ease-in-out;
+  -moz-animation: bounce .52s infinite ease-in-out;
+  -o-animation: bounce .52s infinite ease-in-out;
+  animation: bounce .52s infinite ease-in-out;
+}
+
+@-webkit-keyframes bounce {
+  0%   { transform: translate( 0px, 0px ); }
+  50%   { transform: translate( 0px, -3px ); }
+  100%   { transform: translate( 0px, 0px ); }
+}
+
+@-moz-keyframes bounce {
+  0%   { transform: translate( 0px, 0px ); }
+  50%   { transform: translate( 0px, -3px ); }
+  100%   { transform: translate( 0px, 0px ); }
+}
+
+@-o-keyframes bounce {
+  0%   { transform: translate( 0px, 0px ); }
+  50%   { transform: translate( 0px, -3px ); }
+  100%   { transform: translate( 0px, 0px ); }
+}
+
+@keyframes bounce {
+  0%   { transform: translate( 0px, 0px ); }
+  50%   { transform: translate( 0px, -3px ); }
+  100%   { transform: translate( 0px, 0px ); }
+}
+
 

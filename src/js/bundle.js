@@ -16,6 +16,8 @@ var bundle = require('../images/favicon.png');
 
 // Images
 var verdesLogo = require('../fonts/verdes.svg');
+var verdesBird = require('../fonts/verdes-bird.svg');
+var verdesText = require('../fonts/verdes-text.svg');
 var pinpointsLogo = require('../fonts/pinpoints.svg');
 var favicon = require('../images/favicon.png');
 var theProblemVideo = require('../videos/the-problem.mp4');
@@ -82,8 +84,9 @@ var Footer = React.createClass({
   render: function() {
     return (
       <div className="footer copy">
-        <a href="http://verdes.nyc">
-          <img src={verdesLogo} />
+        <a id="verdes-logo" href="http://verdes.nyc">
+          <img id="verdes-bird" src={verdesBird} />
+          <img id="verdes-text" src={verdesText} />
         </a>
       </div>
     );
