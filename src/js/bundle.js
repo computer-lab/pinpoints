@@ -12,7 +12,8 @@ import Favicon from 'react-favicon';
 
 var OrbitControls = require('three-orbit-controls')(THREE)
 
-var bundle = require('../images/favicon.png');
+var favicon = require('../images/favicon.png');
+var pinpointsCard = require('../images/pinpoints.jpg');
 
 // Images
 var verdesLogo = require('../fonts/verdes.svg');
