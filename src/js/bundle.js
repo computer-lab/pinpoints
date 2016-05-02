@@ -166,7 +166,7 @@ var ExploreThree = React.createClass({
 
 var RedDot = React.createClass({
   getInitialState: function(){
-    return { color: 0xee0000, wireframe: false };
+    return { color: 0xee0000, wireframe: true };
   },
   _onMouseDown: function(){
     document.body.style.cursor = 'initial';
@@ -175,19 +175,19 @@ var RedDot = React.createClass({
 
   _onMouseEnter: function(){
     document.body.style.cursor = 'pointer';
-    this.setState({ color: 0xff0000, wireframe: true });
+    this.setState({ color: 0xff0000, wireframe: false });
   },
 
   _onMouseLeave: function(){
     document.body.style.cursor = 'initial';
-    this.setState({ color: 0xee0000, wireframe: false });
+    this.setState({ color: 0xee0000, wireframe: true });
   },
   render: function(){
     return (
       <mesh position={this.props.position} rotation={new THREE.Euler()}
             onMouseDown={this._onMouseDown} onMouseEnter={this._onMouseEnter}
             onMouseLeave={this._onMouseLeave}> 
-        <sphereGeometry widthSegments={16} heightSegments={12} radius={35} />
+        <sphereGeometry widthSegments={14} heightSegments={10} radius={35} />
         <meshBasicMaterial wireframe={this.state.wireframe} color={this.state.color}/>
       </mesh>
       );
@@ -228,7 +228,7 @@ var ExploreThreeRenderer = React.createClass({
     controls.enableZoom = false;
     controls.enablePan = false;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.75;
+    controls.autoRotateSpeed = 0.85;
     controls.minPolarAngle = 0.14;
     controls.maxPolarAngle = 3.0;
 
@@ -284,30 +284,30 @@ var ExploreThreeRenderer = React.createClass({
                                near={0.1} far={2000} ref="camera"
                                position={this.state.cameraPosition} rotation={this.state.cameraRotation}/>
             <mesh rotation={this.state.cubeRotation}>
-              <boxGeometry width={3} height={960} depth={3} />
+              <boxGeometry width={2} height={960} depth={2} />
               <meshBasicMaterial color={0xffffff}/>
             </mesh>
             <mesh rotation={this.state.cubeRotation}>
-              <boxGeometry width={850} height={3} depth={3} />
+              <boxGeometry width={1000} height={2} depth={2} />
               <meshBasicMaterial color={0xffffff}/>
             </mesh>
             <mesh rotation={this.state.cubeRotation}>
-              <boxGeometry width={3} height={3} depth={850} />
+              <boxGeometry width={2} height={2} depth={1000} />
               <meshBasicMaterial color={0xffffff}/>
             </mesh>
-            <RedDot position={new THREE.Vector3(-175,250,125)}
+            <RedDot position={new THREE.Vector3(-215,250,200)}
                     href={"/problem"} />
-            <RedDotText position={new THREE.Vector3(-175,300,125)} 
+            <RedDotText position={new THREE.Vector3(-215,300,200)} 
                         rotation={this.state.cameraRotation}
                         text={"The Problem"} />
-            <RedDot position={new THREE.Vector3(100,100,100)}
+            <RedDot position={new THREE.Vector3(150,100,150)}
                     href={"/solution"} />
-            <RedDotText position={new THREE.Vector3(100,150,100)} 
+            <RedDotText position={new THREE.Vector3(150,150,150)} 
                         rotation={this.state.cameraRotation}
                         text={"The Solution"} />
-            <RedDot position={new THREE.Vector3(-200,-230,-150)}
+            <RedDot position={new THREE.Vector3(-250,-230,-200)}
                     href={"/brandvolume"} />
-            <RedDotText position={new THREE.Vector3(-200,-180,-150)} 
+            <RedDotText position={new THREE.Vector3(-250,-180,-200)} 
                         rotation={this.state.cameraRotation}
                         text={"Brand Volume"} />
             <RedDot position={new THREE.Vector3(180,-100,-150)}
@@ -315,9 +315,9 @@ var ExploreThreeRenderer = React.createClass({
             <RedDotText position={new THREE.Vector3(180,-50,-150)} 
                         rotation={this.state.cameraRotation}
                         text={"Market Space"} />
-            <RedDot position={new THREE.Vector3(150,-270,50)}
+            <RedDot position={new THREE.Vector3(175,-270,175)}
                     href={"/contact"} />
-            <RedDotText position={new THREE.Vector3(150,-220,50)} 
+            <RedDotText position={new THREE.Vector3(175,-220,175)} 
                         rotation={this.state.cameraRotation}
                         text={"Use PinPoints"} />
           </scene>
@@ -337,7 +337,7 @@ var Contact = React.createClass({
         redefine how businesses visualize the market space and their place
         within it.  To use PinPoints, get in touch with us.
         </h2> 
-        <a className="button" href="mailto:info@verdes.nyc">Contact</a>
+        <a className="button" href="mailto:info@pinpoints.io">INFO@PINPOINTS.IO</a>
       </div>
     );
   }
