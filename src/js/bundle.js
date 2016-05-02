@@ -16,9 +16,9 @@ var favicon = require('../images/favicon.png');
 var pinpointsCard = require('../images/pinpoints.jpg');
 
 // Images
-var verdesLogo = require('../fonts/verdes.svg');
 var verdesBird = require('../fonts/verdes-bird.svg');
 var verdesText = require('../fonts/verdes-text.svg');
+var arrow = require('../images/arrow.png');
 var pinpointsLogo = require('../fonts/pinpoints.svg');
 var favicon = require('../images/favicon.png');
 var theProblemVideo = require('../videos/the-problem.mp4');
@@ -98,9 +98,8 @@ var Home = React.createClass({
   render: function(){
     return (
       <div className="copy"> 
-        <h2>
-            PinPoints is a digital tool that turns large convoluted data sets into insights. 
-        </h2> 
+        <h2>PinPoints is a data visualization tool that 
+        turns large convoluted marketing data sets into insights.</h2> 
         <Link className="button" to="/explore">EXPLORE</Link>
       </div>
     );
@@ -159,6 +158,12 @@ var ExploreThree = React.createClass({
   render: function(){
     return( 
       <div className="container" ref="viewer">
+      <Link className="arrow arrow-left" to="/">
+        <img src={arrow} />
+      </Link>
+      <Link className="arrow arrow-right" to="/problem">
+        <img src={arrow} />
+      </Link>
       <ExploreThreeRenderer width={this.state.viewerWidth} height={this.state.viewerHeight} />
       </div>
       );
@@ -333,11 +338,10 @@ var Contact = React.createClass({
   render: function(){
     return (
       <div className="copy"> 
-        <h2>
-        PinPoints is a tool created by <a href="http://verdes.nyc">Verdes</a> to
-        redefine how businesses visualize the market space and their place
-        within it.  To use PinPoints, get in touch with us.
-        </h2> 
+      <h2>
+      PinPoints is a tool created to redefine how businesses visualize the
+      market space and their place within it.  To use PinPoints, get in touch.
+      </h2> 
         <a className="button" href="mailto:info@pinpoints.io">INFO@PINPOINTS.IO</a>
       </div>
     );
@@ -368,7 +372,13 @@ var VideoProblem = React.createClass({
   render: function(){
     return (
       <div className="copy">
-        <h2>The Problem</h2>
+        <Link className="arrow arrow-left" to="/">
+          <img src={arrow} />
+        </Link>
+        <Link className="arrow arrow-right" to="/solution">
+          <img src={arrow} />
+        </Link>
+        <h2>Video One: The Problem</h2>
         <VideoPlayer video={theProblemVideo} />
         <br />
         <Link className="button" to="/explore">Back</Link>
@@ -381,25 +391,14 @@ var VideoSolution = React.createClass({
   render: function(){
     return (
       <div className="copy"> 
-        <h2>
-        The Solution
-        </h2> 
+        <Link className="arrow arrow-left" to="/">
+          <img src={arrow} />
+        </Link>
+        <Link className="arrow arrow-right" to="/brandvolume">
+          <img src={arrow} />
+        </Link>
+        <h2>Video Two: The Solution</h2> 
         <VideoPlayer video={theSolutionVideo} />
-        <br />
-        <Link className="button" to="/explore">Back</Link>
-      </div>
-    );
-  }
-});
-
-var VideoMarketSpace = React.createClass({
-  render: function(){
-    return (
-      <div className="copy"> 
-        <h2>
-        Market Space
-        </h2> 
-        <VideoPlayer video={marketSpaceVideo} />
         <br />
         <Link className="button" to="/explore">Back</Link>
       </div>
@@ -411,9 +410,13 @@ var VideoBrandVolume = React.createClass({
   render: function(){
     return (
       <div className="copy"> 
-        <h2>
-        Brand Volume
-        </h2> 
+        <Link className="arrow arrow-left" to="/">
+          <img src={arrow} />
+        </Link>
+        <Link className="arrow arrow-right" to="/marketspace">
+          <img src={arrow} />
+        </Link>
+        <h2>Video Three: Brand Volume </h2> 
         <VideoPlayer video={brandVolumeVideo} />
         <br />
         <Link className="button" to="/explore">Back</Link>
@@ -421,6 +424,26 @@ var VideoBrandVolume = React.createClass({
     );
   }
 });
+
+var VideoMarketSpace = React.createClass({
+  render: function(){
+    return (
+      <div className="copy"> 
+        <Link className="arrow arrow-left" to="/">
+          <img src={arrow} />
+        </Link>
+        <Link className="arrow arrow-right" to="/contact">
+          <img src={arrow} />
+        </Link>
+        <h2>Video Four: Market Space</h2> 
+        <VideoPlayer video={marketSpaceVideo} />
+        <br />
+        <Link className="button" to="/explore">Back</Link>
+      </div>
+    );
+  }
+});
+
 
 var font;
 var loader = new THREE.FontLoader();
