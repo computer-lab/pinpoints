@@ -210,17 +210,18 @@ a.button:hover, a.button:focus {
 
 #verdes-bird {
   display: block;
+  margin: auto;
   height: 2.0em;
   @media(max-width: $on-mobile){
     height: 1.5em;
   }
-  margin: auto;
   margin-bottom: 0.75em;
 }
 
 #verdes-text {
   height: 0.45em;
   display: block;
+  margin: auto;
 }
 
 
