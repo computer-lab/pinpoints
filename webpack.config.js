@@ -1,4 +1,5 @@
 var path = require("path");
+var webpack = require("webpack");
 
 function getEntrySources(sources) {
   if (process.env.NODE_ENV !== 'production') {
@@ -40,6 +41,12 @@ module.exports = {
           loader: 'url?limit=8192&name=images/[name].[ext]'
         } 
       ]
-    }
-
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env': {
+          'NODE_ENV': JSON.stringify('production')
+        }
+      })
+    ]
 };

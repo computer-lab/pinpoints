@@ -16,11 +16,10 @@ var favicon = require('../images/favicon.png');
 var pinpointsCard = require('../images/pinpoints.jpg');
 
 // Images
-var verdesBird = require('../fonts/verdes-bird.svg');
-var verdesText = require('../fonts/verdes-text.svg');
+var verdesBird = require('../images/verdes-bird.png');
+var verdesText = require('../images/verdes-text.png');
 var arrow = require('../images/arrow.png');
-var pinpointsLogo = require('../fonts/pinpoints.svg');
-var favicon = require('../images/favicon.png');
+var pinpointsLogo = require('../images/pinpoints.png');
 var theProblemVideo = require('../videos/the-problem.mp4');
 var theSolutionVideo = require('../videos/the-solution.mp4');
 var brandVolumeVideo = require('../videos/brand-volume.mp4');
