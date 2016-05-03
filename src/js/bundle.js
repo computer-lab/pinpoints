@@ -43,7 +43,16 @@ var App = React.createClass({
   }
 });
 
-var func = (sadf, asdf) => ({test:1});
+function isWebGlSupported() {
+  try {
+    const canvas = document.createElement('canvas');
+    return !!(window.WebGLRenderingContext
+      && (canvas.getContext('webgl')
+        || canvas.getContext('experimental-webgl')));
+  } catch (e) {
+    return false;
+  }
+}
 
 var Header = React.createClass({
   facebookShare: function(){
@@ -99,7 +108,7 @@ var Home = React.createClass({
       <div className="copy"> 
         <h2>PinPoints is a data visualization tool that 
         turns large convoluted marketing data sets into insights.</h2> 
-        <Link className="button" to="/explore">EXPLORE</Link>
+        <Link className="button" to={isWebGlSupported() ? "/explore" : "/problem"}>EXPLORE</Link>
       </div>
     );
   }
