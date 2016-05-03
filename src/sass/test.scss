@@ -154,6 +154,7 @@ video {
 .arrow-left {
   left: 2 * $padding-unit;
   transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
 }
 
 .arrow-right {
