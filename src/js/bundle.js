@@ -349,7 +349,7 @@ var Contact = React.createClass({
         <Link className="arrow arrow-left" to="/">
           <img src={arrow} />
         </Link>
-        <Link className="arrow arrow-right" to="/explore">
+        <Link className="arrow arrow-right" to={isWebGlSupported() ? "/explore" : "/problem"}>
           <img src={arrow} />
         </Link>
         <h2>
