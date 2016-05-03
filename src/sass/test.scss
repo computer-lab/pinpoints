@@ -66,7 +66,7 @@ $pp-red: rgb(255,0,0);
 $pp-blue: rgb(18,0,255);
 
 $padding-unit: 1em;
-$on-mobile: 375px;
+$on-mobile: 860px;
 
 html {
   background-color: $pp-indigo;
@@ -126,6 +126,8 @@ html {
   width: 100%;
 }
 
+video {
+}
 
 .arrow {
   z-index: 1;
@@ -144,7 +146,6 @@ html {
     @media(max-width: $on-mobile) {
       height: 50px;
     }
-
   }
 }
 
@@ -180,10 +181,11 @@ a.button:hover, a.button:focus {
 }
 
 .videoPlayer {
-  max-width: 90vw;
+  max-width: 100%;
+  min-height: 360px;
   margin-top: $padding-unit;
   @media(max-width: $on-mobile){
-    height: 220px;
+    min-height: 220px;
   }
 }
 
@@ -252,5 +254,3 @@ a.button:hover, a.button:focus {
   50%   { transform: translate( 0px, -3px ); }
   100%   { transform: translate( 0px, 0px ); }
 }
-
-

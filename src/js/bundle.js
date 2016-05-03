@@ -193,7 +193,7 @@ var RedDot = React.createClass({
       <mesh position={this.props.position} rotation={new THREE.Euler()}
             onMouseDown={this._onMouseDown} onMouseEnter={this._onMouseEnter}
             onMouseLeave={this._onMouseLeave}> 
-        <sphereGeometry widthSegments={14} heightSegments={10} radius={35} />
+        <sphereGeometry widthSegments={14} heightSegments={10} radius={36} />
         <meshBasicMaterial wireframe={this.state.wireframe} color={this.state.color}/>
       </mesh>
       );
@@ -204,7 +204,7 @@ var RedDotText = React.createClass({
   render: function(){
     return (
       <mesh position={this.props.position} rotation={this.props.rotation}>
-        <textGeometry font={font} text={this.props.text} size={20} height={1} />
+        <textGeometry font={font} text={this.props.text} size={21} height={1} />
         <meshBasicMaterial color={0xffffff}/>
       </mesh> 
       );
@@ -234,7 +234,7 @@ var ExploreThreeRenderer = React.createClass({
     controls.enableZoom = false;
     controls.enablePan = false;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.85;
+    controls.autoRotateSpeed = -0.9;
     controls.minPolarAngle = 0.14;
     controls.maxPolarAngle = 3.0;
 
@@ -301,29 +301,29 @@ var ExploreThreeRenderer = React.createClass({
               <boxGeometry width={2} height={2} depth={1000} />
               <meshBasicMaterial color={0xffffff}/>
             </mesh>
-            <RedDot position={new THREE.Vector3(-215,250,200)}
+            <RedDot position={new THREE.Vector3(-225,250,250)}
                     href={"/problem"} />
-            <RedDotText position={new THREE.Vector3(-215,300,200)} 
+            <RedDotText position={new THREE.Vector3(-225,300,250)} 
                         rotation={this.state.cameraRotation}
                         text={"The Problem"} />
-            <RedDot position={new THREE.Vector3(150,100,150)}
+            <RedDot position={new THREE.Vector3(220,120,150)}
                     href={"/solution"} />
-            <RedDotText position={new THREE.Vector3(150,150,150)} 
+            <RedDotText position={new THREE.Vector3(220,170,150)} 
                         rotation={this.state.cameraRotation}
                         text={"The Solution"} />
-            <RedDot position={new THREE.Vector3(-250,-230,-200)}
+            <RedDot position={new THREE.Vector3(-250,-260,-250)}
                     href={"/brandvolume"} />
-            <RedDotText position={new THREE.Vector3(-250,-180,-200)} 
+            <RedDotText position={new THREE.Vector3(-250,-210,-250)} 
                         rotation={this.state.cameraRotation}
                         text={"Brand Volume"} />
-            <RedDot position={new THREE.Vector3(180,-100,-150)}
+            <RedDot position={new THREE.Vector3(225,-150,-275)}
                     href={"/marketspace"} />
-            <RedDotText position={new THREE.Vector3(180,-50,-150)} 
+            <RedDotText position={new THREE.Vector3(225,-100,-275)} 
                         rotation={this.state.cameraRotation}
                         text={"Market Space"} />
-            <RedDot position={new THREE.Vector3(175,-270,175)}
+            <RedDot position={new THREE.Vector3(75,-290,225)}
                     href={"/contact"} />
-            <RedDotText position={new THREE.Vector3(175,-220,175)} 
+            <RedDotText position={new THREE.Vector3(75,-240,225)} 
                         rotation={this.state.cameraRotation}
                         text={"Use PinPoints"} />
           </scene>
@@ -338,10 +338,16 @@ var Contact = React.createClass({
   render: function(){
     return (
       <div className="copy"> 
-      <h2>
-      PinPoints is a tool created to redefine how businesses visualize the
-      market space and their place within it.  To use PinPoints, get in touch.
-      </h2> 
+        <Link className="arrow arrow-left" to="/">
+          <img src={arrow} />
+        </Link>
+        <Link className="arrow arrow-right" to="/explore">
+          <img src={arrow} />
+        </Link>
+        <h2>
+        PinPoints is a tool created to redefine how businesses visualize the
+        market space and their place within it.  To use PinPoints, get in touch.
+        </h2> 
         <a className="button" href="mailto:info@pinpoints.io">INFO@PINPOINTS.IO</a>
       </div>
     );
@@ -363,7 +369,7 @@ var VimeoPlayer = React.createClass({
 var VideoPlayer = React.createClass({
   render: function(){
     return (
-        <video src={this.props.video} controls autoPlay></video>
+        <video className="videoPlayer" src={this.props.video} controls autoPlay></video>
     );
   }
 });
