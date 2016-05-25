@@ -107,7 +107,8 @@ var Home = React.createClass({
     return (
       <div className="copy"> 
         <h2>PinPoints is a data visualization tool that 
-        turns large convoluted marketing data sets into insights.</h2> 
+        transforms existing marketing data sets into consumer 
+        and brand insights.</h2> 
         <Link className="button" to={isWebGlSupported() ? "/explore" : "/problem"}>EXPLORE</Link>
       </div>
     );
@@ -462,7 +463,7 @@ var VideoMarketSpace = React.createClass({
 var font;
 var loader = new THREE.FontLoader();
 // TODO: fix this font nonsense
-loader.load('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/fonts/helvetiker_regular.typeface.js', function (response) {
+loader.load('https://raw.githubusercontent.com/mrdoob/three.js/r74/examples/fonts/helvetiker_regular.typeface.js', function (response) {
   font = response;
   ReactDOM.render((
     <Router history={hashHistory}>
