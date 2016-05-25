@@ -26,7 +26,10 @@ var brandVolumeVideo = require('../videos/brand-volume.mp4');
 var marketSpaceVideo = require('../videos/market-space.mp4');
 
 // CSS
-var css = require("!style!css!sass!../sass/test.scss");
+var css = require('!style!css!sass!../sass/test.scss');
+
+// Fonts
+//var helvetiker = require('file?name=[name].[ext]!./helvetiker_regular.typeface.js');
 
 var App = React.createClass({
   render: function() {
@@ -462,7 +465,6 @@ var VideoMarketSpace = React.createClass({
 
 var font;
 var loader = new THREE.FontLoader();
-// TODO: fix this font nonsense
 loader.load('https://raw.githubusercontent.com/mrdoob/three.js/r74/examples/fonts/helvetiker_regular.typeface.js', function (response) {
   font = response;
   ReactDOM.render((
